@@ -42,18 +42,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # my apps
+
+    # Your apps
     'users.apps.UsersConfig',
     'customers.apps.CustomersConfig',
     'members.apps.MembersConfig',
-    "accounts.apps.AccountsConfig",
-    "loans.apps.LoansConfig",
+    'accounts.apps.AccountsConfig',
+    'loans.apps.LoansConfig',
 
-    # Third party apps
+    # Third-party apps
     'rest_framework',
-    "corsheaders",
-    'rest_framework_simplejwt',
+    'corsheaders',  # ← remove quotes if it's a string literal; usually no quotes needed
+    # DO NOT ADD 'rest_framework_simplejwt' here — remove both lines
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -175,10 +177,16 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        # You can keep other classes if needed, e.g.:
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+    ),
+    # Optional but recommended: add token lifetimes, etc.
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
 
 # Simple JWT
