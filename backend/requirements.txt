@@ -14,3 +14,4 @@ django-filter
 drf-yasg                # if swagger is used
 python-dotenv           # optional but useful
 djangorestframework-simplejwt>=5.3.0
+drf-writable-nested>=0.7.0
